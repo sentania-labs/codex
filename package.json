@@ -1,0 +1,16 @@
+{
+  "name": "mtg-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace @mtg/web run dev",
+    "lint:web": "npm --workspace @mtg/web run lint",
+    "generate:types": "python apps/api/export_openapi.py && npm --workspace @mtg/shared run generate"
+  },
+  "devDependencies": {
+    "prettier": "3.3.3"
+  }
+}
