@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScanSessionResult",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "uploaded",
+        "processing",
+        "needs_review",
+        "ready",
+        "exporting",
+        "complete",
+        "failed"
+      ]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "original_uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "image_id",
+        "width",
+        "height",
+        "original_uri"
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group_id": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "assigned_board": {
+            "type": "string",
+            "enum": [
+              "main",
+              "side",
+              "none",
+              "unknown"
+            ]
+          },
+          "oracle": {
+            "type": "object",
+            "properties": {
+              "oracle_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "oracle_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "oracle_id",
+                    "name",
+                    "confidence"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "name",
+              "confidence",
+              "candidates"
+            ]
+          },
+          "printing": {
+            "type": "object",
+            "properties": {
+              "printing_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "set_code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "collector_number": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "printing_id": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "set_code": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "collector_number": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "confidence"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "confidence",
+              "candidates"
+            ]
+          },
+          "needs_review": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "group_id",
+          "qty",
+          "assigned_board",
+          "oracle",
+          "printing",
+          "needs_review"
+        ]
+      }
+    }
+  },
+  "required": [
+    "session_id",
+    "status",
+    "image",
+    "groups"
+  ]
+}
